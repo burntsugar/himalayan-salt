@@ -1,15 +1,15 @@
 module.exports = {
-    presets: [
-        [
-            '@babel/preset-env',
-            {
-                targets: {
-                    node: '13.2',
-                },
-                modules: 'commonjs',
-            },
-        ],
+  presets: [
+    [
+      '@babel/preset-env',
+      {
+        targets: {
+          node: '13.2',
+        },
+        modules: 'commonjs',
+      },
     ],
+  ],
 
-    plugins: [],
+  plugins: [],
 };
