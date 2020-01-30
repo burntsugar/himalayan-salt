@@ -2,7 +2,7 @@
  * @Author: rach@rach.colley 
  * @Date: 2020-01-30 14:42:19 
  * @Last Modified by: rach@rach.colley
- * @Last Modified time: 2020-01-30 17:34:12
+ * @Last Modified time: 2020-01-30 19:01:30
  */
 
 import { randomBytes, pseudoRandomBytes, createHmac } from "crypto";
@@ -59,6 +59,16 @@ const himalaya = (() => {
         return pair
     }
 
+    const authenticate = (givenPassword:string, salt:string, hash:string) => {
+
+        if (!givenPassword || !salt || !hash ) throw new TypeError(typeErrorMessage(`givenPassword, salt and hash arguments required.`));
+
+        if (hash == createHmac('SHA256', salt).update(givenPassword).digest('hex')) {
+            return true;
+        } 
+        return false;
+    }
+
     const typeErrorMessage = (src: string): string => {
         return `Error: ${src}`
     }
@@ -69,6 +79,7 @@ const himalaya = (() => {
 
     return {
         generate256BitPaswordHash: generate256BitPaswordHash,
+        authenticate:authenticate,
     }
 
 })();
