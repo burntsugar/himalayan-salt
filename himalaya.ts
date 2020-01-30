@@ -1,54 +1,62 @@
 /*
- * @Author: rach@rach.colley 
+ * @Author: rrr@burntsugar.rocks 
  * @Date: 2020-01-30 14:42:19 
- * @Last Modified by: rach@rach.colley
- * @Last Modified time: 2020-01-30 19:01:30
+ * @Last Modified by: rrr@burntsugar.rocks
+ * @Last Modified time: 2020-01-31 10:18:20
  */
 
-import { randomBytes, pseudoRandomBytes, createHmac } from "crypto";
-import { isNumber } from 'lodash';
+import { randomBytes, createHmac } from "crypto";
 
+/**
+ * RMP
+ */
 const himalaya = (() => {
 
-
-    const HASH = {
-        SHA256_ALG: 'SHA256',
+    enum HASH {
+        SHA256_ALG = 'SHA256',
+        BYTE_LENGTH = 32,
     }
-    Object.freeze(HASH)
 
-    const PASSWORD = {
-        LEN_MIN: 8,
+    enum PASSWORD {
+        LEN_MIN = 8,
     }
-    Object.freeze(PASSWORD)
 
-    const SALT = {
-        BYTE_LENGTH: 32,
+    enum SALT {
+        BYTE_LENGTH = 32,
     }
-    Object.freeze(SALT)
+
+    enum FORMAT {
+        HEX = 'hex',
+    }
 
     const generateSalt = (): string => {
         const buffer: Buffer = randomBytes(SALT.BYTE_LENGTH);
-        const saltStr: string = buffer.toString('hex')
+        const saltStr: string = buffer.toString(FORMAT.HEX)
         return saltStr;
     }
 
     const generateSaltedPassword = (salt: string, password: string): string => {
-        var hash_saltedPasswordHash: string = createHmac(HASH.SHA256_ALG, salt).update(password).digest('hex');
-        return hash_saltedPasswordHash;
+        var hash: string = createHmac(HASH.SHA256_ALG, salt).update(password).digest(FORMAT.HEX);
+        return hash;
     }
 
     /**
      * @public 
-     * generate256BitPaswordHash('password') => [32 byte salt, 256 bit hash]
-     * generate256BitPaswordHash('passwor') => RangeError
-     * generate256BitPaswordHash() => TypeError
-     * @param password 
+     * - generate256BitPaswordHash('password') => [32 byte salt, 256 bit hash]
+     * - generate256BitPaswordHash('passwor') => RangeError for string length < 8
+     * - generate256BitPaswordHash(notAString123) => TypeError for type other than string
+     * - generate256BitPaswordHash() => TypeError for falsey (null, undefined)
+     * @param {string} password  
+     * @return {string[]}
      */
     const generate256BitPaswordHash = (password: string): string[] => {
         let pair: string[] = [];
 
         if (!password)
             throw new TypeError(typeErrorMessage(`Password argument required.`));
+
+        if (!(typeof(password) === 'string'))throw new TypeError(typeErrorMessage(`Password argument must be a string.`));
+
         if (password.length < PASSWORD.LEN_MIN)
             throw new RangeError(rangeErrorMessage(`Password length must be >= ${PASSWORD.LEN_MIN}`));
 
@@ -59,22 +67,37 @@ const himalaya = (() => {
         return pair
     }
 
+    /**
+     * Authenticates a given password against a 32 byte salt and hash.
+     * @public
+     * - authenticate('password',32 byte salt, 32 byte hash) => true/false
+     * - authenticate() => TypeError when any argument is not provided.
+     * - authenticate('password', not 32 byte salt, not 32 byte hash) => RangeError when salt and/or hash not 32 bytes.
+     * @param {string} givenPassword 
+     * @param {string} salt 
+     * @param {string} hash 
+     * @return {boolean}
+     */
     const authenticate = (givenPassword:string, salt:string, hash:string) => {
 
         if (!givenPassword || !salt || !hash ) throw new TypeError(typeErrorMessage(`givenPassword, salt and hash arguments required.`));
 
-        if (hash == createHmac('SHA256', salt).update(givenPassword).digest('hex')) {
+        if(salt.length != (SALT.BYTE_LENGTH * 2)) throw new RangeError(typeErrorMessage(`salt is not ${SALT.BYTE_LENGTH} bytes.`));
+
+        if(hash.length != (HASH.BYTE_LENGTH * 2)) throw new RangeError(typeErrorMessage(`hash is not ${HASH.BYTE_LENGTH} bytes.`));
+
+        if (hash == createHmac(HASH.SHA256_ALG, salt).update(givenPassword).digest('hex')) {
             return true;
         } 
         return false;
     }
 
     const typeErrorMessage = (src: string): string => {
-        return `Error: ${src}`
+        return `TypeError: ${src}`
     }
 
     const rangeErrorMessage = (src: string): string => {
-        return `Error ${src}`
+        return `RangeError ${src}`
     }
 
     return {
