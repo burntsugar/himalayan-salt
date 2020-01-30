@@ -1,8 +1,14 @@
 # himalayan-salt
 
-Status: Development
+## Password salting and hashing library for Node.js
 
-Password salting and hashing library
+![Pink salt](cover.jpg)
+
+Photo by [Autri Taheri](https://unsplash.com/@ataheri?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
+
+<br>
+
+# Status: Development
 
 * [TTD](https://www.agilealliance.org/?s=TDD#q=~(infinite~false~filters~(postType~(~)~categories~(~))~searchTerm~'TDD~sort~false~sortDirection~'asc~page~1))
 * [TypeScript](https://www.typescriptlang.org/)
