@@ -41,4 +41,4 @@ Photo by [Autri Taheri](https://unsplash.com/@ataheri?utm_source=unsplash&utm_me
 
 <hr>
 
-*rrr@burntsugar.rocks*
+*rrr@<span></span>burntsugar.rocks*
