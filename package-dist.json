@@ -1,0 +1,22 @@
+{
+  "name": "himalayan-salt",
+  "author": {
+    "name": "burntsugar",
+    "email": "rrr@burntsugar.rocks",
+    "url": "https://github.com/burntsugar"
+  },
+  "keywords": [
+    "JavaScript",
+    "ES6",
+    "Authentication"
+  ],
+  "version": "1.0.0",
+  "description": "Password salting and hashing library for Node.js",
+  "scripts": {},
+  "license": "ISC",
+  "main":"index.js",
+  "dependencies": {
+    "@babel/preset-env": "^7.8.3",
+    "esm": "^3.2.25"
+  }
+}

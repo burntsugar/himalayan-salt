@@ -59,6 +59,7 @@
   },
   "files": [
     "src/demo.ts",
-    "src/himalaya.ts"
+    "src/himalaya.ts",
+    "src/index.ts"
   ]
 }
