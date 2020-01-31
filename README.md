@@ -8,13 +8,7 @@ Photo by [Autri Taheri](https://unsplash.com/@ataheri?utm_source=unsplash&utm_me
 
 <br>
 
-## Status: Development
-
-* [TTD](https://www.agilealliance.org/?s=TDD#q=~(infinite~false~filters~(postType~(~)~categories~(~))~searchTerm~'TDD~sort~false~sortDirection~'asc~page~1))
-* [TypeScript](https://www.typescriptlang.org/)
-* [Crypto](https://nodejs.org/api/crypto.html#crypto_crypto)
-* [Jest](https://jestjs.io/en/)
-* [ES6](https://tc39.es/ecma262/)
+# Status: 👷🏽‍♀️ Development
 
 ## Install
 
@@ -40,6 +34,18 @@ Photo by [Autri Taheri](https://unsplash.com/@ataheri?utm_source=unsplash&utm_me
 `npm run demo`
 
 ## Build dist package (working on it)
+
+````JavaScript
+let yourself = go();
+````
+
+## What's inside
+
+* [TDD](https://www.agilealliance.org/?s=TDD#q=~(infinite~false~filters~(postType~(~)~categories~(~))~searchTerm~'TDD~sort~false~sortDirection~'asc~page~1))
+* [TypeScript](https://www.typescriptlang.org/)
+* [Crypto](https://nodejs.org/api/crypto.html#crypto_crypto)
+* [Jest](https://jestjs.io/en/)
+* [ES6](https://tc39.es/ecma262/)
 
 <br>
 
