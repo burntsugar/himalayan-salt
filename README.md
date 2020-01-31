@@ -37,7 +37,9 @@ Photo by [Autri Taheri](https://unsplash.com/@ataheri?utm_source=unsplash&utm_me
 
 (compile first!)
 
-`npm run rundemo`
+`npm run demo`
+
+## Build dist package (working on it)
 
 <br>
 
