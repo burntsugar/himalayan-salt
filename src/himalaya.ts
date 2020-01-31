@@ -2,7 +2,7 @@
  * @Author: rrr@burntsugar.rocks 
  * @Date: 2020-01-30 14:42:19 
  * @Last Modified by: rrr@burntsugar.rocks
- * @Last Modified time: 2020-01-31 10:18:20
+ * @Last Modified time: 2020-02-01 09:57:23
  */
 
 import { randomBytes, createHmac } from "crypto";
@@ -86,7 +86,7 @@ const himalaya = (() => {
 
         if(hash.length != (HASH.BYTE_LENGTH * 2)) throw new RangeError(typeErrorMessage(`hash is not ${HASH.BYTE_LENGTH} bytes.`));
 
-        if (hash == createHmac(HASH.SHA256_ALG, salt).update(givenPassword).digest('hex')) {
+        if (hash == createHmac(HASH.SHA256_ALG, salt).update(givenPassword).digest(FORMAT.HEX)) {
             return true;
         } 
         return false;
