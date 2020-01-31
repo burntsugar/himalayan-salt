@@ -18,6 +18,8 @@ Photo by [Autri Taheri](https://unsplash.com/@ataheri?utm_source=unsplash&utm_me
 
 ## Install
 
+**Prerequisite**: [Node.js 13.5x](https://github.com/nvm-sh/nvm#install--update-script) installation.
+
 1. `git clone <this_url> && cd <repo_name>`
 1. `npm install`
 
