@@ -58,7 +58,7 @@
     "forceConsistentCasingInFileNames": true /* Disallow inconsistently-cased references to the same file. */
   },
   "files": [
-    "demo.ts",
-    "himalaya.ts"
+    "src/demo.ts",
+    "src/himalaya.ts"
   ]
 }
