@@ -2,7 +2,7 @@
  * @Author: rrr@burntsugar.rocks 
  * @Date: 2020-01-30 14:42:33 
  * @Last Modified by: rrr@burntsugar.rocks
- * @Last Modified time: 2020-01-31 12:22:29
+ * @Last Modified time: 2020-01-31 13:52:55
  */
 
  import {himalaya} from './himalaya'
