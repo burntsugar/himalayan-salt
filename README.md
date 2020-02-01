@@ -59,6 +59,7 @@ VERIFICATION >>>  true
 1. `cd himalayan-salt`
 1. `npm install`
 
+
 ## Compile TypeScript
 
 `npm run tsc`
@@ -82,6 +83,65 @@ Run [Jest](https://jestjs.io/docs/en/getting-started) test suites.
 `npm run demo`
 
 Run demo.
+
+## How to use
+
+### Option 1: Use via symlink to local npm
+
+1. Compile sources...
+
+````bash
+$ cd himalayan-salt
+$ npm run tsc
+````
+
+2. **Symlink** to local npm
+
+````bash
+../himalayan-salt $ npm link
+````
+
+3. **Link** your project with himalaya-salt npm symlink
+
+````bash
+../your-project $ npm link himalaya-salt
+````
+
+4. **Import** himalayan-salt library into your project
+
+````javascript
+// your.js
+const him = require('himalayan-salt-sat');
+
+const output = him.himalaya.generateSHA256PassphraseHash('mypassphrase');
+console.log(output);
+````
+
+5. **Unlink** when you're done
+
+````
+../your-project $ npm unlink himalaya-salt
+````
+
+...and remove himalayan-salt npm symlink
+
+````bash
+../himalayan-salt $ npm unlink
+````
+
+<br>
+
+### Option 2: Install from local file
+
+*coming soon...*
+
+<br>
+
+### Option 3: Install from npm
+
+*coming soon...*
+
+<br>
 
 ## Modern password security for system designers
 
