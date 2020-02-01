@@ -8,11 +8,13 @@ Photo by [Autri Taheri](https://unsplash.com/@ataheri?utm_source=unsplash&utm_me
 
 <br>
 
+# Status: 👷🏽‍♀️ Development | Active
+
 ## Overview
 
 - Built upon [Crypto](https://nodejs.org/api/crypto.html#crypto_crypto).
 - SHA-256 unique 32 byte salt generated for each call
-- SHA-256 salted password hash
+- SHA-256 salted passphrase hash
 - Salt and hash returned as separate 64 character length hex encoded strings
 
 ````javascript
@@ -47,27 +49,31 @@ HASH >>>  e77e5d7823e59dc8130f8cacc0575a9a2a3cc3d878c5da8d4963b41726861ba0
 VERIFICATION >>>  true
 ````
 
-
 <br>
-
-# Status: 👷🏽‍♀️ Development
 
 ## Install
 
 **Prerequisite**: [Node.js 13.5x](https://github.com/nvm-sh/nvm#install--update-script) installation.
 
-1. `git clone <this_url> && cd <repo_name>`
+1. `git clone git@github.com:burntsugar/himalayan-salt.git`
+1. `cd himalayan-salt`
 1. `npm install`
 
 ## Compile TypeScript
 
-`npm run tsc` => compile .ts to .js in ./out
+`npm run tsc`
+
+Compiles .ts to .js in ./out
+
 
 ## Test 
 
 (compile first!)
 
-`npm test` => run all [Jest](https://jestjs.io/docs/en/getting-started) test suites.
+`npm test`
+
+Run [Jest](https://jestjs.io/docs/en/getting-started) test suites.
+
 
 ## Run demo
 
@@ -75,27 +81,25 @@ VERIFICATION >>>  true
 
 `npm run demo`
 
-## Build dist package (working on it)
+Run demo.
 
-````JavaScript
-let yourself = go();
-````
+## Modern password security for system designers
 
-<hr>
-
-This implementation is guided by [Modern password security for system designers](https://cloud.google.com/solutions/modern-password-security-for-system-designers.pdf).
+This project is guided by [Modern password security for system designers](https://cloud.google.com/solutions/modern-password-security-for-system-designers.pdf).
 
 Passwords...
 
-> Allow the largest character set possible, such as
-UTF-8, including emoji.
+> *Allow the largest character set possible, such as
+UTF-8, including emoji.*
 
-> Have a long minimum length and allow very long
-passwords.
+> *Have a long minimum length and allow very long
+passwords.*
+
 
 ## What's next...
-Option to return salt and hash as a single hex encoded string
-Implement [Scrypt password-based key derivation function](https://tools.ietf.org/html/rfc7914.html) version.
+* Option to return salt and hash as a single hex encoded string
+* NPM package
+* Implement [Scrypt password-based key derivation function](https://tools.ietf.org/html/rfc7914.html) version.
 
 
 ## What's inside
