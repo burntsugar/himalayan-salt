@@ -55,56 +55,62 @@ VERIFICATION >>>  true
 
 **Prerequisite**: [Node.js 13.5x](https://github.com/nvm-sh/nvm#install--update-script) installation.
 
-1. `git clone git@github.com:burntsugar/himalayan-salt.git`
-1. `cd himalayan-salt`
-1. `npm install`
-
+````bash 
+user $ git clone git@github.com:burntsugar/himalayan-salt.git
+user $ cd himalayan-salt
+user/himalayan-salt $ npm install
+````
 
 ## Compile TypeScript
 
-`npm run tsc`
+Compile .ts to .js in ./out
 
-Compiles .ts to .js in ./out
+````bash
+user/himalayan-salt $ npm run tsc
+````
 
 
 ## Test 
 
 (compile first!)
 
-`npm test`
-
 Run [Jest](https://jestjs.io/docs/en/getting-started) test suites.
+
+````bash
+user/himalayan-salt $ npm test
+````
 
 
 ## Run demo
 
 (compile first!)
 
-`npm run demo`
+````bash
+user/himalayan-salt $ npm run demo
+````
 
-Run demo.
 
 ## How to use
 
 ### Option 1: Use via symlink to local npm
 
-1. Compile sources...
+1. **Compile** sources...
 
 ````bash
-$ cd himalayan-salt
-$ npm run tsc
+user $ cd himalayan-salt
+user/himalayan-salt $ npm run tsc
 ````
 
 2. **Symlink** to local npm
 
 ````bash
-../himalayan-salt $ npm link
+user/himalayan-salt $ npm link
 ````
 
 3. **Link** your project with himalaya-salt npm symlink
 
 ````bash
-../your-project $ npm link himalaya-salt
+user/your-project $ npm link himalaya-salt
 ````
 
 4. **Import** himalayan-salt library into your project
@@ -120,13 +126,13 @@ console.log(output);
 5. **Unlink** when you're done
 
 ````
-../your-project $ npm unlink himalaya-salt
+user/your-project $ npm unlink himalaya-salt
 ````
 
 ...and remove himalayan-salt npm symlink
 
 ````bash
-../himalayan-salt $ npm unlink
+user/himalayan-salt $ npm unlink
 ````
 
 <br>
