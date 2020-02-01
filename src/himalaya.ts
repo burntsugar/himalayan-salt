@@ -17,7 +17,7 @@ const himalaya = (() => {
         BYTE_LENGTH = 32,
     }
 
-    enum PASSWORD {
+    enum PASSPHRASE {
         LEN_MIN = 8,
     }
 
@@ -35,58 +35,58 @@ const himalaya = (() => {
         return saltStr;
     }
 
-    const generateSaltedPassword = (salt: string, password: string): string => {
-        var hash: string = createHmac(HASH.SHA256_ALG, salt).update(password).digest(FORMAT.HEX);
+    const generateSaltedPassphrase = (salt: string, passphrase: string): string => {
+        var hash: string = createHmac(HASH.SHA256_ALG, salt).update(passphrase).digest(FORMAT.HEX);
         return hash;
     }
 
     /**
      * @public 
-     * - generate256BitPaswordHash('password') => [32 byte salt, 256 bit hash]
-     * - generate256BitPaswordHash('passwor') => RangeError for string length < 8
-     * - generate256BitPaswordHash(notAString123) => TypeError for type other than string
-     * - generate256BitPaswordHash() => TypeError for falsey (null, undefined)
-     * @param {string} password  
+     * - generateSHA256PassphraseHash('passphrase') => [32 byte salt, 256 bit hash]
+     * - generateSHA256PassphraseHash('passwor') => RangeError for string length < 8
+     * - generateSHA256PassphraseHash(notAString123) => TypeError for type other than string
+     * - generateSHA256PassphraseHash() => TypeError for falsey (null, undefined)
+     * @param {string} passphrase  
      * @return {string[]}
      */
-    const generate256BitPaswordHash = (password: string): string[] => {
+    const generateSHA256PassphraseHash = (passphrase: string): string[] => {
         let pair: string[] = [];
 
-        if (!password)
-            throw new TypeError(typeErrorMessage(`Password argument required.`));
+        if (!passphrase)
+            throw new TypeError(typeErrorMessage(`passphrase argument required.`));
 
-        if (!(typeof(password) === 'string'))throw new TypeError(typeErrorMessage(`Password argument must be a string.`));
+        if (!(typeof(passphrase) === 'string'))throw new TypeError(typeErrorMessage(`passphrase argument must be a string.`));
 
-        if (password.length < PASSWORD.LEN_MIN)
-            throw new RangeError(rangeErrorMessage(`Password length must be >= ${PASSWORD.LEN_MIN}`));
+        if (passphrase.length < PASSPHRASE.LEN_MIN)
+            throw new RangeError(rangeErrorMessage(`passphrase length must be >= ${PASSPHRASE.LEN_MIN}`));
 
         const salt = generateSalt();
         pair[0] = salt;
-        pair[1] = generateSaltedPassword(salt, password);
+        pair[1] = generateSaltedPassphrase(salt, passphrase);
 
         return pair
     }
 
     /**
-     * Authenticates a given password against a 32 byte salt and hash.
+     * Authenticates a given passphrase against a 32 byte salt and hash.
      * @public
-     * - authenticate('password',32 byte salt, 32 byte hash) => true/false
+     * - authenticate('passphrase',32 byte salt, 32 byte hash) => true/false
      * - authenticate() => TypeError when any argument is not provided.
-     * - authenticate('password', not 32 byte salt, not 32 byte hash) => RangeError when salt and/or hash not 32 bytes.
-     * @param {string} givenPassword 
+     * - authenticate('passphrase', not 32 byte salt, not 32 byte hash) => RangeError when salt and/or hash not 32 bytes.
+     * @param {string} givenPassphrase 
      * @param {string} salt 
      * @param {string} hash 
      * @return {boolean}
      */
-    const authenticate = (givenPassword:string, salt:string, hash:string) => {
+    const verify = (givenPassphrase:string, salt:string, hash:string):boolean => {
 
-        if (!givenPassword || !salt || !hash ) throw new TypeError(typeErrorMessage(`givenPassword, salt and hash arguments required.`));
+        if (!givenPassphrase || !salt || !hash ) throw new TypeError(typeErrorMessage(`givenPassphrase, salt and hash arguments required.`));
 
         if(salt.length != (SALT.BYTE_LENGTH * 2)) throw new RangeError(typeErrorMessage(`salt is not ${SALT.BYTE_LENGTH} bytes.`));
 
         if(hash.length != (HASH.BYTE_LENGTH * 2)) throw new RangeError(typeErrorMessage(`hash is not ${HASH.BYTE_LENGTH} bytes.`));
 
-        if (hash == createHmac(HASH.SHA256_ALG, salt).update(givenPassword).digest(FORMAT.HEX)) {
+        if (hash == createHmac(HASH.SHA256_ALG, salt).update(givenPassphrase).digest(FORMAT.HEX)) {
             return true;
         } 
         return false;
@@ -101,8 +101,8 @@ const himalaya = (() => {
     }
 
     return {
-        generate256BitPaswordHash: generate256BitPaswordHash,
-        authenticate:authenticate,
+        generateSHA256PassphraseHash: generateSHA256PassphraseHash,
+        verify:verify,
     }
 
 })();
