@@ -2,7 +2,7 @@
  * @Author: rrr@burntsugar.rocks
  * @Date: 2020-01-30 14:42:51
  * @Last Modified by: rrr@burntsugar.rocks
- * @Last Modified time: 2020-02-01 14:51:44
+ * @Last Modified time: 2020-02-03 10:21:41
  */
 
 import {himalaya} from '../out/himalaya.js';
@@ -11,30 +11,86 @@ const LEN_32_BYTE_SALT_HEX = 64;
 const LEN_256_BIT_HASH_HEX = 64;
 
 describe('himalaya#generateSHA256PassphraseHash', () => {
-  describe('when called with a passphrase', () => {
-    it('that is valid, returns an array of salt, hash', () => {
-      const pwordTest = 'testY9O/<2uWguEU';
-      expect(himalaya.generateSHA256PassphraseHash(pwordTest).length).toEqual(2);
-      expect(himalaya.generateSHA256PassphraseHash(pwordTest)[0].length).toEqual(LEN_32_BYTE_SALT_HEX);
-      expect(himalaya.generateSHA256PassphraseHash(pwordTest)[1].length).toEqual(LEN_256_BIT_HASH_HEX);
-    });
+  describe('when called without defining a value for combined, ', () => {
+    describe('and a passphrase', () => {
+      it('that is valid, returns an object containing salt and hash', () => {
+        const pwordTest = 'testY9O/<2uWguEU';
+        expect(himalaya.generateSHA256PassphraseHash(pwordTest).salt.length).toEqual(LEN_32_BYTE_SALT_HEX);
+        expect(himalaya.generateSHA256PassphraseHash(pwordTest).hash.length).toEqual(LEN_256_BIT_HASH_HEX);
+      });
 
-    it('that is less than the minimum length, throws RangeError', () => {
-      expect(() => {
-        himalaya.generateSHA256PassphraseHash('1234567');
-      }).toThrowError(RangeError);
-    });
+      it('that is less than the minimum length, throws RangeError', () => {
+        expect(() => {
+          himalaya.generateSHA256PassphraseHash('1234567');
+        }).toThrowError(RangeError);
+      });
 
-    it('that is falsey (null, undefined), throws TypeError', () => {
-      expect(() => {
-        himalaya.generateSHA256PassphraseHash(false);
-      }).toThrowError(TypeError);
-    });
+      it('that is falsey (null, undefined), throws TypeError', () => {
+        expect(() => {
+          himalaya.generateSHA256PassphraseHash(false);
+        }).toThrowError(TypeError);
+      });
 
-    it('that is a number, throws TypeError', () => {
-      expect(() => {
-        himalaya.generateSHA256PassphraseHash(12345678);
-      }).toThrowError(TypeError);
+      it('that is a number, throws TypeError', () => {
+        expect(() => {
+          himalaya.generateSHA256PassphraseHash(12345678);
+        }).toThrowError(TypeError);
+      });
+    });
+  });
+
+  describe('when called with combined = false, ', () => {
+    describe('and a passphrase', () => {
+      it('that is valid, returns an object containing salt and hash', () => {
+        const pwordTest = 'testY9O/<2uWguEU';
+        expect(himalaya.generateSHA256PassphraseHash(pwordTest, false).salt.length).toEqual(LEN_32_BYTE_SALT_HEX);
+        expect(himalaya.generateSHA256PassphraseHash(pwordTest, false).hash.length).toEqual(LEN_256_BIT_HASH_HEX);
+      });
+
+      it('that is less than the minimum length, throws RangeError', () => {
+        expect(() => {
+          himalaya.generateSHA256PassphraseHash('1234567', false);
+        }).toThrowError(RangeError);
+      });
+
+      it('that is falsey (null, undefined), throws TypeError', () => {
+        expect(() => {
+          himalaya.generateSHA256PassphraseHash(false, false);
+        }).toThrowError(TypeError);
+      });
+
+      it('that is a number, throws TypeError', () => {
+        expect(() => {
+          himalaya.generateSHA256PassphraseHash(12345678, false);
+        }).toThrowError(TypeError);
+      });
+    });
+  });
+
+  describe('when called with combined = true ', () => {
+    describe('and a passphrase', () => {
+      it('that is valid, returns a single 128 character string containg salt/ hash', () => {
+        const pwordTest = 'testY9O/<2uWguEU';
+        expect(himalaya.generateSHA256PassphraseHash(pwordTest, true).hashes.length).toEqual(128);
+      });
+
+      it('that is less than the minimum length, throws RangeError', () => {
+        expect(() => {
+          himalaya.generateSHA256PassphraseHash('1234567', true);
+        }).toThrowError(RangeError);
+      });
+
+      it('that is falsey (null, undefined), throws TypeError', () => {
+        expect(() => {
+          himalaya.generateSHA256PassphraseHash(false, true);
+        }).toThrowError(TypeError);
+      });
+
+      it('that is a number, throws TypeError', () => {
+        expect(() => {
+          himalaya.generateSHA256PassphraseHash(12345678, true);
+        }).toThrowError(TypeError);
+      });
     });
   });
 });
