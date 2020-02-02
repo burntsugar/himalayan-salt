@@ -2,7 +2,7 @@
  * @Author: rrr@burntsugar.rocks 
  * @Date: 2020-01-30 14:42:19 
  * @Last Modified by: rrr@burntsugar.rocks
- * @Last Modified time: 2020-02-01 09:57:23
+ * @Last Modified time: 2020-02-03 10:01:32
  */
 
 import { randomBytes, createHmac } from "crypto";
@@ -47,10 +47,10 @@ const himalaya = (() => {
      * - generateSHA256PassphraseHash(notAString123) => TypeError for type other than string
      * - generateSHA256PassphraseHash() => TypeError for falsey (null, undefined)
      * @param {string} passphrase  
-     * @return {string[]}
+     * @param {boolean} combined When true, values are returned as a single string where the first 64 characters is the salt and the remaining 64 characters is the hash. When false, values are returned in an array where the first index is the salt and the remaining index is the hash. Set to false by default.
+     * @return {object}
      */
-    const generateSHA256PassphraseHash = (passphrase: string): string[] => {
-        let pair: string[] = [];
+    const generateSHA256PassphraseHash = (passphrase: string, combined: boolean = false): object => {
 
         if (!passphrase)
             throw new TypeError(typeErrorMessage(`passphrase argument required.`));
@@ -60,11 +60,11 @@ const himalaya = (() => {
         if (passphrase.length < PASSPHRASE.LEN_MIN)
             throw new RangeError(rangeErrorMessage(`passphrase length must be >= ${PASSPHRASE.LEN_MIN}`));
 
-        const salt = generateSalt();
-        pair[0] = salt;
-        pair[1] = generateSaltedPassphrase(salt, passphrase);
+            const genSalt = generateSalt();
+            const genHash = generateSaltedPassphrase(genSalt, passphrase);
 
-        return pair
+            if (combined)return {hashes: `${genSalt}${genHash}`};
+            return {salt: genSalt, hash: genHash};
     }
 
     /**
