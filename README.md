@@ -15,7 +15,7 @@ Photo by [Autri Taheri](https://unsplash.com/@ataheri?utm_source=unsplash&utm_me
 - Built upon [Crypto](https://nodejs.org/api/crypto.html#crypto_crypto).
 - SHA-256 unique 32 byte salt generated for each call
 - SHA-256 salted passphrase hash
-- Salt and hash returned as separate 64 character length hex encoded strings
+- Salt and hash returned as 64 character hex encoded strings
 
 ````javascript
 // demo.js
