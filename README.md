@@ -94,7 +94,7 @@ npm install --save himalayan-salt
 
 ````javascript
 // your.js
-const him = require('himalayan-salt-sat');
+const him = require('himalayan-salt');
 
 const output = him.himalaya.generateSHA256PassphraseHash('mypassphrase');
 console.log(output);
