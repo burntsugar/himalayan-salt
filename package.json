@@ -6,6 +6,9 @@
     "url": "https://github.com/burntsugar"
   },
   "keywords": [
+    "hashing",
+    "salting",
+    "encryption",
     "TypeScript",
     "JavaScript",
     "ES6",
@@ -13,7 +16,7 @@
     "Authentication"
   ],
   "version": "1.0.0",
-  "description": "Password salting and hashing library for Node.js",
+  "description": "Cryptographically strong password salting and hashing library for Node.js",
   "main": "out/index.js",
   "scripts": {
     "test": "jest",

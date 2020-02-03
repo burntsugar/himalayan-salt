@@ -6,17 +6,24 @@
     "url": "https://github.com/burntsugar"
   },
   "keywords": [
+    "hashing",
+    "salting",
+    "encryption",
     "JavaScript",
     "ES6",
     "Authentication"
   ],
   "version": "1.0.0",
-  "description": "Password salting and hashing library for Node.js",
+  "description": "Cryptographically strong password salting and hashing library for Node.js",
   "scripts": {},
   "license": "ISC",
   "main":"index.js",
   "dependencies": {
     "@babel/preset-env": "^7.8.3",
     "esm": "^3.2.25"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/burntsugar/himalayan-salt"
   }
 }
