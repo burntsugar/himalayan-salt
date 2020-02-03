@@ -86,7 +86,9 @@ user/himalayan-salt $ npm test
 user/himalayan-salt $ npm run demo
 ````
 
-## Install and use
+<br>
+
+## Install
 
 ````bash
 npm install --save himalayan-salt
