@@ -19,17 +19,24 @@ Photo by [Autri Taheri](https://unsplash.com/@ataheri?utm_source=unsplash&utm_me
 
 ````javascript
 // demo.js
+
+// ES6 import
+import {himalayanSalt} from './himalayan-salt.js';
+// or
+// require
+// const hs = require('./himalayan-salt.js');
+// const himalayanSalt = hs.himalayanSalt;
+
 const passphrase1 = 'testY9O/<2uWguEU';
 console.log(`passphrase is: ${passphrase1}`);
-const result1: GeneratedResult = himalayanSalt.generate(passphrase1);
+const result1 = himalayanSalt.generate(passphrase1);
 console.log(`SALT >>>  ${result1.getSalt()}`);
 console.log(`HASH >>>  ${result1.getHash()}`);
 console.log(`VERIFICATION >>>  ${himalayanSalt.verify(passphrase1, result1.getSalt(), result1.getHash())}`);
 
-console.log();
 const passphrase2 = 'testY9O/<2uWguEU'; // same passphrase
 console.log(`passphrase is: ${passphrase2}`);
-const result2: GeneratedResult = himalayanSalt.generate(passphrase2);
+const result2 = himalayanSalt.generate(passphrase2);
 console.log(`SALT >>>  ${result2.getSalt()}`); // unique salt,
 console.log(`HASH >>>  ${result2.getHash()}`); // and hash
 console.log(`VERIFICATION >>>  ${himalayanSalt.verify(passphrase2, result2.getSalt(), result2.getHash())}`);
