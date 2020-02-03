@@ -2,7 +2,7 @@
  * @Author: rrr@burntsugar.rocks 
  * @Date: 2020-02-03 11:33:45 
  * @Last Modified by: rrr@burntsugar.rocks
- * @Last Modified time: 2020-02-03 17:35:11
+ * @Last Modified time: 2020-02-04 10:24:02
  */
 
  /**
@@ -20,7 +20,6 @@ interface GeneratedResult {
 
 /**
  * @class
- * @implements {GeneratedResult}
  */
 class Hashes implements GeneratedResult  {
 
@@ -36,17 +35,17 @@ class Hashes implements GeneratedResult  {
         this.hash = hash;
     }
 
-    /** @return {string} 64 character hash. */
+    /** @return {string} 64 character hex encoded hash. */
     getHash():string{
         return this.hash;
     }
 
-    /** @return {string} 64 character salt. */
+    /** @return {string} 64 character hex encoded salt. */
     getSalt():string{
         return this.salt;
     }
 
-    /** @return {string} where the first 64 characters contain the salt and the     remaing characters contain the hash. */
+    /** @return {string} hex encoded, where the first 64 characters are the salt and the remaining 64 characters are the hash. */
     getCombined():string{
         return `${this.salt}${this.hash}`;
     }
