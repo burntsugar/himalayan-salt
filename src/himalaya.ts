@@ -2,13 +2,15 @@
  * @Author: rrr@burntsugar.rocks 
  * @Date: 2020-01-30 14:42:19 
  * @Last Modified by: rrr@burntsugar.rocks
- * @Last Modified time: 2020-02-03 10:01:32
+ * @Last Modified time: 2020-02-03 14:28:44
  */
 
 import { randomBytes, createHmac } from "crypto";
+import {GeneratedResult, Hashes} from './result';
 
 /**
- * RMP
+ * @module
+ * @desc Provides salt, hash and verification facilities, using {@link https://nodejs.org/api/crypto.html#crypto_crypto|Crypto}
  */
 const himalaya = (() => {
 
@@ -40,17 +42,18 @@ const himalaya = (() => {
         return hash;
     }
 
-    /**
-     * @public 
-     * - generateSHA256PassphraseHash('passphrase') => [32 byte salt, 256 bit hash]
-     * - generateSHA256PassphraseHash('passwor') => RangeError for string length < 8
-     * - generateSHA256PassphraseHash(notAString123) => TypeError for type other than string
-     * - generateSHA256PassphraseHash() => TypeError for falsey (null, undefined)
-     * @param {string} passphrase  
-     * @param {boolean} combined When true, values are returned as a single string where the first 64 characters is the salt and the remaining 64 characters is the hash. When false, values are returned in an array where the first index is the salt and the remaining index is the hash. Set to false by default.
-     * @return {object}
+/**
+     * Generates a 32 byte salt and SHA-256 hash.
+     * Usage:
+     * - generateSHA256PassphraseHash( 'passphrase') => [32 byte salt, 256 bit hash] 
+     * - generateSHA256PassphraseHash( 'passwor') => RangeError for string length < 8 
+     * - generateSHA256PassphraseHash( notAString123) => TypeError for type other than string 
+     * generateSHA256PassphraseHash() => TypeError for falsey (null, undefined)
+     * 
+     * @param {string} passphrase given password for which the hashes will be created.
+     * @return {GeneratedResult} generated salt and hash wrapped in {@link Hashes} instance.
      */
-    const generateSHA256PassphraseHash = (passphrase: string, combined: boolean = false): object => {
+    const generateSHA256PassphraseHash = (passphrase: string): GeneratedResult => {
 
         if (!passphrase)
             throw new TypeError(typeErrorMessage(`passphrase argument required.`));
@@ -63,20 +66,19 @@ const himalaya = (() => {
             const genSalt = generateSalt();
             const genHash = generateSaltedPassphrase(genSalt, passphrase);
 
-            if (combined)return {hashes: `${genSalt}${genHash}`};
-            return {salt: genSalt, hash: genHash};
+            return new Hashes(genSalt, genHash);
+           
     }
 
     /**
-     * Authenticates a given passphrase against a 32 byte salt and hash.
-     * @public
-     * - authenticate('passphrase',32 byte salt, 32 byte hash) => true/false
-     * - authenticate() => TypeError when any argument is not provided.
-     * - authenticate('passphrase', not 32 byte salt, not 32 byte hash) => RangeError when salt and/or hash not 32 bytes.
-     * @param {string} givenPassphrase 
-     * @param {string} salt 
-     * @param {string} hash 
-     * @return {boolean}
+     * @description Verifies the given passphrase against the given salt and hash.
+     - authenticate( 'passphrase', 64 character hex encoded salt, 64 character hex encoded hash) => true/false 
+     - authenticate() => TypeError when any argument is not provided
+     - authenticate( 'passphrase' , not 64 character string, not 64 character string) => RangeError
+     * @param {string} givenPassphrase given password for which the hashes will be verified.
+     * @param {string} salt 64 character length hex encoded salt
+     * @param {string} hash 64 character length hex encoded hash
+     * @return {boolean} true if the given password can be reconcilled to the given salt and hash, or else false.
      */
     const verify = (givenPassphrase:string, salt:string, hash:string):boolean => {
 
