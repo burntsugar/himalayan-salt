@@ -60,6 +60,7 @@
   "files": [
     "src/demo.ts",
     "src/himalaya.ts",
-    "src/index.ts"
+    "src/index.ts",
+    "src/result.ts"
   ]
 }
