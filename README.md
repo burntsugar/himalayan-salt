@@ -21,17 +21,17 @@ Photo by [Autri Taheri](https://unsplash.com/@ataheri?utm_source=unsplash&utm_me
 // demo.js
 const passphrase1 = 'testY9O/<2uWguEU';
 console.log(`passphrase is: ${passphrase1}`);
-const result1: GeneratedResult = himalaya.generateSHA256PassphraseHash(passphrase1);
+const result1 = himalaya_1.himalaya.generateSHA256PassphraseHash(passphrase1);
 console.log(`SALT >>>  ${result1.getSalt()}`);
 console.log(`HASH >>>  ${result1.getHash()}`);
-console.log(`VERIFICATION >>>  ${himalaya.verify(passphrase1, result1.getSalt(), result1.getHash())}`);
+console.log(`VERIFICATION >>>  ${himalaya_1.himalaya.verify(passphrase1, result1.getSalt(), result1.getHash())}`);
 
 const passphrase2 = 'testY9O/<2uWguEU'; // same passphrase
 console.log(`passphrase is: ${passphrase2}`);
-const result2: GeneratedResult = himalaya.generateSHA256PassphraseHash(passphrase2);
+const result2 = himalaya_1.himalaya.generateSHA256PassphraseHash(passphrase2);
 console.log(`SALT >>>  ${result2.getSalt()}`); // unique salt,
 console.log(`HASH >>>  ${result2.getHash()}`); // and hash
-console.log(`VERIFICATION >>>  ${himalaya.verify(passphrase2, result2.getSalt(), result2.getHash())}`);
+console.log(`VERIFICATION >>>  ${himalaya_1.himalaya.verify(passphrase2, result2.getSalt(), result2.getHash())}`);
 ````
 
 Output...
