@@ -35,7 +35,7 @@ const result1: GeneratedResult = himalaya.generateSHA256PassphraseHash(passphras
 console.log(`SALT >>>  ${result1.getSalt()}`);
 console.log(`HASH >>>  ${result1.getHash()}`);
 console.log(`VERIFICATION >>>  ${himalaya.verify(passphrase1, result1.getSalt(), result1.getHash())}`);
-console.log
+
 console.log();
 const passphrase2 = 'testY9O/<2uWguEU'; // same passphrase
 console.log(`passphrase is: ${passphrase2}`);
