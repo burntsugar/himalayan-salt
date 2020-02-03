@@ -59,8 +59,8 @@
   },
   "files": [
     "src/demo.ts",
-    "src/himalaya.ts",
-    "src/index.ts",
+    "src/altit256.ts",
+    "src/himalayan-salt.ts",
     "src/result.ts"
   ]
 }

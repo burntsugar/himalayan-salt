@@ -17,7 +17,7 @@
   "description": "Cryptographically strong password salting and hashing library for Node.js",
   "scripts": {},
   "license": "ISC",
-  "main":"index.js",
+  "main":"himalayan-salt.js",
   "dependencies": {
     "@babel/preset-env": "^7.8.3",
     "esm": "^3.2.25"

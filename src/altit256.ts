@@ -2,7 +2,7 @@
  * @Author: rrr@burntsugar.rocks 
  * @Date: 2020-01-30 14:42:19 
  * @Last Modified by: rrr@burntsugar.rocks
- * @Last Modified time: 2020-02-03 14:28:44
+ * @Last Modified time: 2020-02-03 17:45:38
  */
 
 import { randomBytes, createHmac } from "crypto";
@@ -12,7 +12,7 @@ import {GeneratedResult, Hashes} from './result';
  * @module
  * @desc Provides salt, hash and verification facilities, using {@link https://nodejs.org/api/crypto.html#crypto_crypto|Crypto}
  */
-const himalaya = (() => {
+const altit256 = (() => {
 
     enum HASH {
         SHA256_ALG = 'SHA256',
@@ -109,4 +109,4 @@ const himalaya = (() => {
 
 })();
 
-export { himalaya };
+export {altit256};

@@ -17,12 +17,12 @@
   ],
   "version": "1.0.0",
   "description": "Cryptographically strong password salting and hashing library for Node.js",
-  "main": "out/index.js",
+  "main": "out/himalayan-salt.js",
   "scripts": {
     "test": "jest",
     "tsc": "node node_modules/.bin/tsc",
     "demo": "node -r esm out/demo.js",
-    "build-dist": "rm -rf dist && mkdir dist && cp out/index.js dist/ && cp out/himalaya.js dist && cp out/result.js dist/ && cp package-dist.json dist/package.json && cp babel.config.js dist/ && cp npm-assets/README.md dist/"
+    "build-dist": "rm -rf dist && mkdir dist && cp out/himalayan-salt.js dist/ && cp out/altit256.js dist && cp out/result.js dist/ && cp package-dist.json dist/package.json && cp babel.config.js dist/ && cp npm-assets/README.md dist/"
   },
   "license": "ISC",
   "dependencies": {

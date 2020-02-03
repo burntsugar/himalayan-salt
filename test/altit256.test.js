@@ -2,57 +2,57 @@
  * @Author: rrr@burntsugar.rocks
  * @Date: 2020-01-30 14:42:51
  * @Last Modified by: rrr@burntsugar.rocks
- * @Last Modified time: 2020-02-03 11:34:26
+ * @Last Modified time: 2020-02-03 17:46:49
  */
 
-import {himalaya} from '../out/himalaya.js';
+import {altit256} from '../out/altit256.js';
 
 const LEN_32_BYTE_SALT_HEX = 64;
 const LEN_256_BIT_HASH_HEX = 64;
 
-describe('himalaya#generateSHA256PassphraseHash', () => {
+describe('altit256#generateSHA256PassphraseHash', () => {
   describe('when called with a passphrase', () => {
     it('that is valid, returns an object containing salt and hash', () => {
       const pwordTest = 'testY9O/<2uWguEU';
-      expect(himalaya.generateSHA256PassphraseHash(pwordTest).salt.length).toEqual(LEN_32_BYTE_SALT_HEX);
-      expect(himalaya.generateSHA256PassphraseHash(pwordTest).hash.length).toEqual(LEN_256_BIT_HASH_HEX);
+      expect(altit256.generateSHA256PassphraseHash(pwordTest).salt.length).toEqual(LEN_32_BYTE_SALT_HEX);
+      expect(altit256.generateSHA256PassphraseHash(pwordTest).hash.length).toEqual(LEN_256_BIT_HASH_HEX);
     });
 
     it('that is less than the minimum length, throws RangeError', () => {
       expect(() => {
-        himalaya.generateSHA256PassphraseHash('1234567');
+        altit256.generateSHA256PassphraseHash('1234567');
       }).toThrowError(RangeError);
     });
 
     it('that is falsey (null, undefined), throws TypeError', () => {
       expect(() => {
-        himalaya.generateSHA256PassphraseHash(false);
+        altit256.generateSHA256PassphraseHash(false);
       }).toThrowError(TypeError);
     });
 
     it('that is a number, throws TypeError', () => {
       expect(() => {
-        himalaya.generateSHA256PassphraseHash(12345678);
+        altit256.generateSHA256PassphraseHash(12345678);
       }).toThrowError(TypeError);
     });
   });
 });
 
 
-describe('himalaya#verify', () => {
+describe('altit256#verify', () => {
   describe('when called with a passphrase', () => {
     it('that is valid, returns true', () => {
       const passphrase = 'testY9O/<2uWguEU';
       const salt = 'c868f62ec8e354cc9e5e15f08cd984d05407feba1d489aeed31647ce9551234b';
       const hash = '8e4c5f231078cee1d178560d814d88ab277c025433954c0c2bfd07b89c687cfd';
-      expect(himalaya.verify(passphrase, salt, hash)).toBe(true);
+      expect(altit256.verify(passphrase, salt, hash)).toBe(true);
     });
 
     it('that is not valid, returns false', () => {
       const passphrase = 'testY9O';
       const salt = 'c868f62ec8e354cc9e5e15f08cd984d05407feba1d489aeed31647ce9551234b';
       const hash = '8e4c5f231078cee1d178560d814d88ab277c025433954c0c2bfd07b89c687cfd';
-      expect(himalaya.verify(passphrase, salt, hash)).toBe(false);
+      expect(altit256.verify(passphrase, salt, hash)).toBe(false);
     });
   });
 
@@ -61,7 +61,7 @@ describe('himalaya#verify', () => {
       const salt = 'c868f62ec8e354cc9e5e15f08cd984d05407feba1d489aeed31647ce9551234b';
       const hash = '8e4c5f231078cee1d178560d814d88ab277c025433954c0c2bfd07b89c687cfd';
       expect(() => {
-        himalaya.verify(null, salt, hash);
+        altit256.verify(null, salt, hash);
       }).toThrowError(TypeError);
     });
 
@@ -69,7 +69,7 @@ describe('himalaya#verify', () => {
       const passphrase = 'testY9O/<2uWguEU';
       const hash = '8e4c5f231078cee1d178560d814d88ab277c025433954c0c2bfd07b89c687cfd';
       expect(() => {
-        himalaya.verify(passphrase, null, hash);
+        altit256.verify(passphrase, null, hash);
       }).toThrowError(TypeError);
     });
 
@@ -77,13 +77,13 @@ describe('himalaya#verify', () => {
       const passphrase = 'testY9O/<2uWguEU';
       const salt = 'c868f62ec8e354cc9e5e15f08cd984d05407feba1d489aeed31647ce9551234b';
       expect(() => {
-        himalaya.verify(passphrase, salt, null);
+        altit256.verify(passphrase, salt, null);
       }).toThrowError(TypeError);
     });
 
     it('null args', () => {
       expect(() => {
-        himalaya.verify(null, null, null);
+        altit256.verify(null, null, null);
       }).toThrowError(TypeError);
     });
   });
@@ -94,7 +94,7 @@ describe('himalaya#verify', () => {
       const salt = 'c868f62ec8e354cc9e5e15f08cd984d05407feba1d489aeed31647ce9551234';
       const hash = '8e4c5f231078cee1d178560d814d88ab277c025433954c0c2bfd07b89c687cfd';
       expect(() => {
-        himalaya.verify(passphrase, salt, hash);
+        altit256.verify(passphrase, salt, hash);
       }).toThrowError(RangeError);
     });
 
@@ -103,7 +103,7 @@ describe('himalaya#verify', () => {
       const salt = 'c868f62ec8e354cc9e5e15f08cd984d05407feba1d489aeed31647ce9551234bx';
       const hash = '8e4c5f231078cee1d178560d814d88ab277c025433954c0c2bfd07b89c687cfd';
       expect(() => {
-        himalaya.verify(passphrase, salt, hash);
+        altit256.verify(passphrase, salt, hash);
       }).toThrowError(RangeError);
     });
 
@@ -112,7 +112,7 @@ describe('himalaya#verify', () => {
       const salt = 'c868f62ec8e354cc9e5e15f08cd984d05407feba1d489aeed31647ce9551234b';
       const hash = '8e4c5f231078cee1d178560d814d88ab277c025433954c0c2bfd07b89c687cf';
       expect(() => {
-        himalaya.verify(passphrase, salt, hash);
+        altit256.verify(passphrase, salt, hash);
       }).toThrowError(RangeError);
     });
 
@@ -121,7 +121,7 @@ describe('himalaya#verify', () => {
       const salt = 'c868f62ec8e354cc9e5e15f08cd984d05407feba1d489aeed31647ce9551234b';
       const hash = '8e4c5f231078cee1d178560d814d88ab277c025433954c0c2bfd07b89c687cfdx';
       expect(() => {
-        himalaya.verify(passphrase, salt, hash);
+        altit256.verify(passphrase, salt, hash);
       }).toThrowError(RangeError);
     });
 
@@ -130,7 +130,7 @@ describe('himalaya#verify', () => {
       const salt = 'c868f62ec8e354cc9e5e15f08cd984d05407feba1d489aeed31647ce9551234bx';
       const hash = '8e4c5f231078cee1d178560d814d88ab277c025433954c0c2bfd07b89c687cfdx';
       expect(() => {
-        himalaya.verify(passphrase, salt, hash);
+        altit256.verify(passphrase, salt, hash);
       }).toThrowError(RangeError);
     });
 
@@ -139,7 +139,7 @@ describe('himalaya#verify', () => {
       const salt = 'c868f62ec8e354cc9e5e15f08cd984d05407feba1d489aeed31647ce9551234';
       const hash = '8e4c5f231078cee1d178560d814d88ab277c025433954c0c2bfd07b89c687cf';
       expect(() => {
-        himalaya.verify(passphrase, salt, hash);
+        altit256.verify(passphrase, salt, hash);
       }).toThrowError(RangeError);
     });
   });
