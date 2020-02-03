@@ -21,18 +21,17 @@ Photo by [Autri Taheri](https://unsplash.com/@ataheri?utm_source=unsplash&utm_me
 // demo.js
 const passphrase1 = 'testY9O/<2uWguEU';
 console.log(`passphrase is: ${passphrase1}`);
-const pair1: string[] = himalaya.generateSHA256PassphraseHash(passphrase1);
-console.log(`SALT >>>  ${pair1[0]}`);
-console.log(`HASH >>>  ${pair1[1]}`);
-console.log(`VERIFICATION >>>  ${himalaya.verify(passphrase1, pair1[0], pair1[1])}`);
-console.log
-console.log();
+const result1: GeneratedResult = himalaya.generateSHA256PassphraseHash(passphrase1);
+console.log(`SALT >>>  ${result1.getSalt()}`);
+console.log(`HASH >>>  ${result1.getHash()}`);
+console.log(`VERIFICATION >>>  ${himalaya.verify(passphrase1, result1.getSalt(), result1.getHash())}`);
+
 const passphrase2 = 'testY9O/<2uWguEU'; // same passphrase
 console.log(`passphrase is: ${passphrase2}`);
-const pair2: string[] = himalaya.generateSHA256PassphraseHash(passphrase2);
-console.log(`SALT >>>  ${pair2[0]}`); // unique salt,
-console.log(`HASH >>>  ${pair2[1]}`); // and hash
-console.log(`VERIFICATION >>>  ${himalaya.verify(passphrase2, pair2[0], pair2[1])}`);
+const result2: GeneratedResult = himalaya.generateSHA256PassphraseHash(passphrase2);
+console.log(`SALT >>>  ${result2.getSalt()}`); // unique salt,
+console.log(`HASH >>>  ${result2.getHash()}`); // and hash
+console.log(`VERIFICATION >>>  ${himalaya.verify(passphrase2, result2.getSalt(), result2.getHash())}`);
 ````
 
 Output...
@@ -51,7 +50,7 @@ VERIFICATION >>>  true
 
 <br>
 
-## Install
+## Download
 
 **Prerequisite**: [Node.js 13.5x](https://github.com/nvm-sh/nvm#install--update-script) installation.
 
@@ -61,7 +60,7 @@ user $ cd himalayan-salt
 user/himalayan-salt $ npm install
 ````
 
-## Compile TypeScript
+### Compile TypeScript
 
 Compile .ts to .js in ./out
 
@@ -69,8 +68,7 @@ Compile .ts to .js in ./out
 user/himalayan-salt $ npm run tsc
 ````
 
-
-## Test 
+### Test 
 
 (compile first!)
 
@@ -80,8 +78,7 @@ Run [Jest](https://jestjs.io/docs/en/getting-started) test suites.
 user/himalayan-salt $ npm test
 ````
 
-
-## Run demo
+### Run demo
 
 (compile first!)
 
@@ -89,28 +86,19 @@ user/himalayan-salt $ npm test
 user/himalayan-salt $ npm run demo
 ````
 
-
-## How to use
+## Install and use
 
 ````bash
 npm install --save himalayan-salt
 ````
 
-* via local install
-* [via symlink to local npm](docs/use-npm-symlink.md)
+````javascript
+// your.js
+const him = require('himalayan-salt-sat');
 
-
-<br>
-
-### Option 2: Install from local file
-
-*coming soon...*
-
-<br>
-
-### Option 3: Install from npm
-
-*coming soon...*
+const output = him.himalaya.generateSHA256PassphraseHash('mypassphrase');
+console.log(output);
+````
 
 <br>
 
@@ -128,8 +116,6 @@ passwords.*
 
 
 ## What's next...
-* Option to return salt and hash as a single hex encoded string
-* NPM package
 * Implement [Scrypt password-based key derivation function](https://tools.ietf.org/html/rfc7914.html) version.
 
 
