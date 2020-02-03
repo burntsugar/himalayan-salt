@@ -2,28 +2,71 @@
 
 ## Cryptographically strong password salting and hashing library for Node.js
 
-![Pink salt](cover.jpg)
-
-Photo by [Autri Taheri](https://unsplash.com/@ataheri?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
+![Photo by Autri Taheri https://unsplash.com/@ataheri?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText](cover.jpg)
 
 <br>
 
-# Status: 👷🏽‍♀️ Development | Active
+# Status: Beta
+
+I maintain this library for use in my own projects. It is built upon Node.js [Crypto](https://nodejs.org/api/crypto.html#crypto_crypto) which is easy to integrate. You may like to look though this **himalayan-salt** integration in order to make your own - or **install** it and use it :)
+
+## Features in this version
+
+<hr>
+
+### + generate(passphrase) 
+
+Returns cryptographically strong, unique 64 character hex encoded salt, and SHA-256 hash for a given passphrase. Returned in an instance of **Hashes**.
+
+**Usage:**
+
+- **generateSHA256PassphraseHash**( 'passphrase') => **Hashes** instance containing generated salt and hash
+
+**Error handling:**
+
+- generateSHA256PassphraseHash( 'passwor') => RangeError for string length < 8 
+- generateSHA256PassphraseHash( 123) => TypeError when argument is other than string
+- generateSHA256PassphraseHash() => TypeError when argument is falsey (null, undefined)
+
+Generated strings are returned in a **Hashes** instance. You can choose to return them separately or combined, depending on your requirements.
+
++ getSalt() => 64 character hex encoded salt result
++ getHash() => 64 character hex encoded hash result
++ getCombined() => 128 character hex encoded result where the first 64 characters are the salt and the remaining 64 characters are the hash. 
+
+<hr>
+
+### + verify(passphrase, salt, hash)
+
+Verifies a given passphrase against a given salt and hash.
+
+**Usage:**
+
+- **verify**( 'passphrase', 64 character hex encoded salt, 64 character hex encoded hash) => true/false 
+
+**Error handling:**
+
+- verify() => TypeError when any argument is not provided
+- verify( 'passphrase', 123, 123) => RangeError when salt or hash is not a 64 character string.
+
+
+<hr>
+
+<br>
 
 ## Overview
 
 - Built upon [Crypto](https://nodejs.org/api/crypto.html#crypto_crypto).
 - SHA-256 unique 32 byte salt generated for each call
 - SHA-256 salted passphrase hash
-- Salt and hash returned as 64 character hex encoded strings
+- Salt and hash returned as 64 character hex encoded strings - separate or combined.
 
 ````javascript
 // demo.js
 
 // ES6 import
 import {himalayanSalt} from './himalayan-salt.js';
-// or
-// require
+// or require
 // const hs = require('./himalayan-salt.js');
 // const himalayanSalt = hs.himalayanSalt;
 
@@ -32,6 +75,7 @@ console.log(`passphrase is: ${passphrase1}`);
 const result1 = himalayanSalt.generate(passphrase1);
 console.log(`SALT >>>  ${result1.getSalt()}`);
 console.log(`HASH >>>  ${result1.getHash()}`);
+console.log(`COMBINED >>>  ${result1.getCombined()}`);
 console.log(`VERIFICATION >>>  ${himalayanSalt.verify(passphrase1, result1.getSalt(), result1.getHash())}`);
 
 const passphrase2 = 'testY9O/<2uWguEU'; // same passphrase
@@ -39,6 +83,7 @@ console.log(`passphrase is: ${passphrase2}`);
 const result2 = himalayanSalt.generate(passphrase2);
 console.log(`SALT >>>  ${result2.getSalt()}`); // unique salt,
 console.log(`HASH >>>  ${result2.getHash()}`); // and hash
+console.log(`COMBINED >>>  ${result2.getCombined()}`);
 console.log(`VERIFICATION >>>  ${himalayanSalt.verify(passphrase2, result2.getSalt(), result2.getHash())}`);
 ````
 
@@ -46,13 +91,15 @@ Output...
 
 ````
 passphrase is: testY9O/<2uWguEU
-SALT >>>  1ef7deaab5508cdd0b5c7077adfb9ca662e924633ffddb3a8f248cdddc48c04b
-HASH >>>  a87526da147916ff087f888bef3e62f29687414c0201d125bd6ce2e57002147f
+SALT >>>  e4f4b47ac78e90c647cb78f30dff5f07517a6a9a11ff896dcf8b3c9946039f1f
+HASH >>>  1f2b189c0991287baa5ac597229aa6626d79c6f4201d8fb869697fd30f1f2f89
+COMBINED >>>  e4f4b47ac78e90c647cb78f30dff5f07517a6a9a11ff896dcf8b3c9946039f1f1f2b189c0991287baa5ac597229aa6626d79c6f4201d8fb869697fd30f1f2f89
 VERIFICATION >>>  true
 
 passphrase is: testY9O/<2uWguEU
-SALT >>>  e65aad482bc39a0f4ed711c5a4e061de9a9ce2c3d826755284c04e50207aafbf
-HASH >>>  e77e5d7823e59dc8130f8cacc0575a9a2a3cc3d878c5da8d4963b41726861ba0
+SALT >>>  1450c8044a9334b83bbe77dbfe858c455051f709162275c107519d573e9210d0
+HASH >>>  42a6e24e481fdc100b6447d3ae1a935ea455f578f43ad7be2b6cf059233be0f8
+COMBINED >>>  1450c8044a9334b83bbe77dbfe858c455051f709162275c107519d573e9210d042a6e24e481fdc100b6447d3ae1a935ea455f578f43ad7be2b6cf059233be0f8
 VERIFICATION >>>  true
 ````
 
