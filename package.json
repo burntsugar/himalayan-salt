@@ -19,7 +19,7 @@
     "test": "jest",
     "tsc": "node node_modules/.bin/tsc",
     "demo": "node -r esm out/demo.js",
-    "build-dist": "rm -rf dist && mkdir dist && cp -r out/index.js dist/ && cp -r out/himalaya.js dist && cp package-dist.json dist/package.json && cp babel.config.js dist/"
+    "build-dist": "rm -rf dist && mkdir dist && cp out/index.js dist/ && cp out/himalaya.js dist && cp out/result.js dist/ && cp package-dist.json dist/package.json && cp babel.config.js dist/"
   },
   "license": "ISC",
   "dependencies": {
