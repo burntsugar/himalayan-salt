@@ -5,3 +5,5 @@ ignore*
 /out
 
 /dist
+
+/npm-assets
