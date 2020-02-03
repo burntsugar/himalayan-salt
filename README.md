@@ -116,9 +116,12 @@ UTF-8, including emoji.*
 > *Have a long minimum length and allow very long
 passwords.*
 
+<br>
 
 ## What's next...
 * Implement [Scrypt password-based key derivation function](https://tools.ietf.org/html/rfc7914.html) version.
+
+<br>
 
 
 ## What's inside
