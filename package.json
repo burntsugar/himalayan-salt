@@ -15,6 +15,10 @@
     "Jest",
     "Authentication"
   ],
+  "repository": {
+    "type" : "git",
+    "url" : "https://github.com/burntsugar/himalayan-salt.git"
+  },
   "version": "1.0.0",
   "description": "Cryptographically strong password salting and hashing library for Node.js",
   "main": "out/himalayan-salt.js",
