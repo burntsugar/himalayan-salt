@@ -143,7 +143,7 @@ user/himalayan-salt $ npm run demo
 
 <br>
 
-## Install
+## Install into your own project
 
 ````bash
 npm install --save himalayan-salt
@@ -164,6 +164,20 @@ import {himalayanSalt} from 'himalayan-salt';
 // require
 const hs = require('himalayan-salt');
 ````
+
+<br>
+
+## Standalone
+
+Start with `-v` | `-verify` followed by passphrase, salt and hash.
+
+Start with `-g` | `-generate` followed by passphrase.
+
+<br>
+
+## Docker
+
+`docker pull burntsugar/himalayan-salt`
 
 <br>
 
