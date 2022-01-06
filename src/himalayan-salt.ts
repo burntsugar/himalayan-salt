@@ -5,7 +5,7 @@ import {GeneratedResult} from './result'
  * @Author: rrr@burntsugar.rocks 
  * @Date: 2020-02-03 12:41:58 
  * @Last Modified by: mikey.zhaopeng
- * @Last Modified time: 2022-01-06 20:03:55
+ * @Last Modified time: 2022-01-06 20:27:00
  */
 
  /**
@@ -32,7 +32,6 @@ const himalayanSalt = (() => {
 
 export {himalayanSalt};
 
-console.log(process.argv[1]);
 switch(process.argv[2]){
     case '-generate':
     case '-g': console.log(himalayanSalt.generate(process.argv[3]));
