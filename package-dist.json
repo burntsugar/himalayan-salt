@@ -13,7 +13,7 @@
     "ES6",
     "Authentication"
   ],
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "Cryptographically strong password salting and hashing library for Node.js",
   "scripts": {},
   "license": "ISC",
