@@ -16,8 +16,8 @@
     "Authentication"
   ],
   "repository": {
-    "type" : "git",
-    "url" : "https://github.com/burntsugar/himalayan-salt.git"
+    "type": "git",
+    "url": "https://github.com/burntsugar/himalayan-salt.git"
   },
   "version": "1.0.0",
   "description": "Cryptographically strong password salting and hashing library for Node.js",
@@ -26,20 +26,20 @@
     "test": "jest",
     "tsc": "node node_modules/.bin/tsc",
     "demo": "node -r esm out/demo.js",
-    "build-dist": "rm -rf dist && mkdir dist && cp out/himalayan-salt.js dist/ && cp out/altit256.js dist && cp out/result.js dist/ && cp package-dist.json dist/package.json && cp babel.config.js dist/ && cp npm-assets/README.md dist/"
+    "build-dist": "rm -rf dist && mkdir dist && cp out/himalayan-salt.js dist/ && cp out/altit256.js dist && cp out/result.js dist/ && cp out/demo.js dist/ && cp package-dist.json dist/package.json && cp babel.config.js dist/ && cp npm-assets/README.md dist/"
   },
   "license": "ISC",
   "dependencies": {
-    "@babel/preset-env": "^7.8.3",
+    "@babel/preset-env": "^7.16.7",
     "esm": "^3.2.25"
   },
   "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^2.18.0",
-    "@typescript-eslint/parser": "^2.18.0",
-    "eslint": "^6.8.0",
+    "@typescript-eslint/eslint-plugin": "^5.9.0",
+    "@typescript-eslint/parser": "^5.9.0",
+    "eslint": "^8.6.0",
     "eslint-config-google": "^0.14.0",
-    "jest": "^25.1.0",
-    "typescript": "^3.7.5"
+    "jest": "^27.4.7",
+    "typescript": "^3.9.10"
   },
   "jest": {
     "roots": [
