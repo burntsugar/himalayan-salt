@@ -5,7 +5,7 @@ import {GeneratedResult} from './result'
  * @Author: rrr@burntsugar.rocks 
  * @Date: 2020-02-03 12:41:58 
  * @Last Modified by: mikey.zhaopeng
- * @Last Modified time: 2022-01-06 20:27:00
+ * @Last Modified time: 2022-01-06 20:37:49
  */
 
  /**
@@ -39,5 +39,4 @@ switch(process.argv[2]){
     case '-verify':
     case '-v': console.log(himalayanSalt.verify(process.argv[3],process.argv[4],process.argv[5]));
     break;
-    default: console.log('Invalid option');
 }
