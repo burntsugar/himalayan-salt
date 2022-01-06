@@ -184,6 +184,15 @@ Start with `-g` | `-generate` followed by passphrase.
 
 `docker pull burntsugar/himalayan-salt`
 
+### Demo
+`docker run --rm himalayan-salt demo`
+
+### Generate salt and hash
+`docker run --rm himalayan-salt -generate <passphrase>`
+
+### Verify passphrase
+`docker run --rm himalayan-salt -verify <passphrase> <salt> <hash>`
+
 See [dockerhub repository](https://hub.docker.com/repository/docker/burntsugar/himalayan-salt)
 
 <br>
