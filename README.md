@@ -6,9 +6,14 @@
 
 <br>
 
-# Status: Beta
+# Status: Alpha
 
 I maintain this library for use in my own projects. It is built upon Node.js [Crypto](https://nodejs.org/api/crypto.html#crypto_crypto) which is easy to integrate. You may like to look though this **himalayan-salt** integration in order to make your own - or **install** it and use it :)
+
+## What's next...
+* Implement [Scrypt password-based key derivation function](https://tools.ietf.org/html/rfc7914.html) version.
+
+<br>
 
 ## Features in this version
 
@@ -179,6 +184,8 @@ Start with `-g` | `-generate` followed by passphrase.
 
 `docker pull burntsugar/himalayan-salt`
 
+See [dockerhub repository](https://hub.docker.com/repository/docker/burntsugar/himalayan-salt)
+
 <br>
 
 ## Modern password security for system designers
@@ -192,11 +199,6 @@ UTF-8, including emoji.*
 
 > *Have a long minimum length and allow very long
 passwords.*
-
-<br>
-
-## What's next...
-* Implement [Scrypt password-based key derivation function](https://tools.ietf.org/html/rfc7914.html) version.
 
 <br>
 
