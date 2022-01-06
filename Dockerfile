@@ -1,3 +1,5 @@
 FROM node 
 ADD /dist /dist
-RUN node /dist/himalayan-salt.js
+COPY ./entrypoint.sh /
+RUN chmod 755 /entrypoint.sh
+ENTRYPOINT ["/entrypoint.sh"]
