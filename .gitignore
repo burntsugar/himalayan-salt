@@ -7,3 +7,5 @@ ignore*
 /dist
 
 /npm-assets
+
+.DS_Store
